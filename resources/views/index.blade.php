@@ -29,7 +29,7 @@ For developers, JSON waypoints
 <body>
 
 <div class="container-fluid">
-    <h1>Wii U Title Key Database</h1>
+    <h1>Wii U Title Key Database <span class="pull-right"><a class="btn btn-lg btn-primary" href="https://github.com/TomEke/WiiU-Title-Key/">Github</a></span></h1>
 
     <div class="panel panel-primary">
         <div class="panel-heading">
