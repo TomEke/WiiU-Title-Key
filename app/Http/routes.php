@@ -49,7 +49,6 @@ Route::post('/uploadticket', function(Illuminate\Http\Request $request) {
             if ($title->titleKey == null) {
                 $title->titleKey = $titleKey;
                 if ($title->checkValid()) {
-                    $title->parseIcon();
                     $title->save();
                 }
             }
@@ -61,7 +60,6 @@ Route::post('/uploadticket', function(Illuminate\Http\Request $request) {
             Storage::put("tickets/" . $titleID . ".tik", $file);
             //Get a name so we have something with this ticket
             $title = \App\Title::firstOrCreate(["titleID" => $titleID]);
-            $title->parseIcon();
             $title->ticket = true;
             $title->save();
 
@@ -120,7 +118,6 @@ Route::post('/', function(Illuminate\Http\Request $request) {
     $title->titleKey = $titleKey;
 
     if ($title->checkValid()) {
-        $title->parseIcon();
         $title->save();
         return "success";
     }

@@ -118,7 +118,6 @@ class Title extends Model
 
         $this->name = $name;
         $this->region = $region;
-        $this->save();
 
     }
 

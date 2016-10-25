@@ -28,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        \App\Title::creating( function($title) {
+            $title->parseIcon();
+            return true;
+        });
+
     }
 }
