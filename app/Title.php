@@ -10,6 +10,8 @@ class Title extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    protected $guarded = ['titleKey'];
+
     public $incrementing = false;
 
     public function getDecTitleKeyAttribute() {

@@ -31,36 +31,60 @@ For developers, JSON waypoints
 <div class="container-fluid">
     <h1>Wii U Title Key Database <span class="pull-right"><a class="btn btn-lg btn-primary" href="https://github.com/TomEke/WiiU-Title-Key/">Github</a></span></h1>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            Add a title key
+    <div class="col-sm-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add a title key
+            </div>
+
+            <div class="panel-body">
+
+                <div class="col-sm-12">
+                    <form id="titleForm" class="form-horizontal" method="post">
+                        <div class="form-group-lg">
+                            <label class="col-sm-2 control-label" for="titleID">Title ID</label>
+                            <div class="col-sm-10">
+                                <input name="titleID" type="text" class="form-control" id="titleID" size="20" maxlength="16" placeholder="0004000000000000">
+                            </div>
+                        </div>
+                        <div class="form-group-lg">
+                            <label class="col-sm-2 control-label" for="titleKey">Title Key</label>
+                            <div class="col-sm-10">
+                                <input name="titleKey" type="text" class="form-control" id="titleKey" size="40" maxlength="32" placeholder="ffffffffffffffffffffffffffffffff">
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-lg btn-success">Send</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
         </div>
+    </div>
 
-        <div class="panel-body">
+    <div class="col-sm-2">
 
-            <div class="col-sm-12">
-                <form id="titleForm" class="form-horizontal" method="post">
-                    <div class="form-group-lg">
-                        <label class="col-sm-2 control-label" for="titleID">Title ID</label>
-                        <div class="col-sm-10">
-                            <input name="titleID" type="text" class="form-control" id="titleID" size="20" maxlength="16" placeholder="0004000000000000">
-                        </div>
-                    </div>
-                    <div class="form-group-lg">
-                        <label class="col-sm-2 control-label" for="titleKey">Title Key</label>
-                        <div class="col-sm-10">
-                            <input name="titleKey" type="text" class="form-control" id="titleKey" size="40" maxlength="32" placeholder="ffffffffffffffffffffffffffffffff">
-                        </div>
-                    </div>
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-lg btn-success">Send</button>
-                    </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Upload ticket
+            </div>
+
+            <div class="panel-body">
+
+                <form id="keyForm" enctype="multipart/form-data" method="post" action="/uploadticket">
+                    <input type="file" name="file" required="required">
+                    <button type="submit" class="btn btn-default">Upload</button>
                 </form>
 
             </div>
+
         </div>
 
     </div>
+
+    <div class="clearfix"></div>
 
     <h2>Titles</h2>
 
@@ -70,6 +94,7 @@ For developers, JSON waypoints
             <th>Title Key</th>
             <th>Name</th>
             <th>Region</th>
+            <th>Ticket</th>
         </tr></thead>
         @foreach (\App\Title::all()->sortByDesc('type') as $title)
             <tr>
@@ -77,6 +102,11 @@ For developers, JSON waypoints
                 <td class="monospace-text" style="width: 23em;"><button class="clipboard btn btn-info btn-sm"><span class="glyphicon glyphicon-copy"></span></button> {{$title->titleKey}}</td>
                 <td>{{$title->name}}</td>
                 <td>{{$title->region}}</td>
+                <td>
+                @if ($title->ticket)
+                    <a class="btn btn-success" href="/ticket/{{$title->titleID}}.tik"><span class="glyphicon glyphicon-download-alt"></span></a>
+                @endif
+                </td>
             </tr>
         @endforeach
     </table>
