@@ -190,7 +190,8 @@ For developers, JSON waypoints
             ]
         });
         $(".filters").html(
-                '<label>Region <select id="region_select" class="form-control"><option value="">Any</option><option value="ALL">ALL</option><option value="USA">USA</option><option value="EUR">EUR</option><option value="JPN">JPN</option></select></label>'
+                '<label>Region <select id="region_select" class="form-control"><option value="">Any</option><option value="ALL">ALL</option><option value="USA">USA</option><option value="EUR">EUR</option><option value="JPN">JPN</option></select></label>' +
+                '<label>Type <select id="type_select" class="form-control"><option value="">Any</option><option value="eShop/Application">eShop/Application</option><option value="System Application">System Application</option><option value="Demo">Demo</option><option value="Patch">Patch</option><option value="DLC">DLC</option></label>'
         );
         $("#region_select").on('change', function() {
             var val = $.fn.dataTable.util.escapeRegex(
@@ -204,7 +205,7 @@ For developers, JSON waypoints
                     $(this).val()
             );
 
-            dataTable.column(3).search( val ? '^'+val+'$' : '', true, false ).draw();
+            dataTable.column(4).search( val ? '^'+val+'$' : '', true, false ).draw();
         });
         toastr.options = {
             "closeButton": false,
