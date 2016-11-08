@@ -94,6 +94,7 @@ For developers, JSON waypoints
             <th>Title Key</th>
             <th>Name</th>
             <th>Region</th>
+            <th>Type</th>
             <th>Ticket</th>
         </tr></thead>
         @foreach (\App\Title::all()->sortByDesc('type') as $title)
@@ -102,10 +103,11 @@ For developers, JSON waypoints
                 <td class="monospace-text" style="width: 23em;"><button class="clipboard btn btn-info btn-sm"><span class="glyphicon glyphicon-copy"></span></button> {{$title->titleKey}}</td>
                 <td>{{$title->name}}</td>
                 <td>{{$title->region}}</td>
+                <td>{{$title->type}}</td>
                 <td>
-                @if ($title->ticket)
-                    <a class="btn btn-success" href="/ticket/{{$title->titleID}}.tik"><span class="glyphicon glyphicon-download-alt"></span></a>
-                @endif
+                    @if ($title->ticket)
+                        <a class="btn btn-success" href="/ticket/{{$title->titleID}}.tik"><span class="glyphicon glyphicon-download-alt"></span></a>
+                    @endif
                 </td>
             </tr>
         @endforeach

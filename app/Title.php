@@ -18,6 +18,22 @@ class Title extends Model
         return bin2hex(openssl_decrypt(base64_encode(hex2bin($this->titleKey)), 'AES-128-CBC', hex2bin(env('COMMON_KEY')), OPENSSL_ZERO_PADDING, hex2bin($this->titleID . "0000000000000000")));
     }
 
+    public function getTypeAttribute() {
+        $header = strtoupper(substr($this->titleID, 0, 8));
+        if ($header == "00050010" || $header == "0005001B") {
+            return "System Application";
+        } else if ($header == "00050000") {
+            return "eShop/Application";
+        } else if ($header == "00050002") {
+            return "Demo";
+        } else if ($header == "0005000E") {
+            return "Patch";
+        } else if ($header == "0005000C") {
+            return "DLC";
+        }
+        return "Unknown";
+    }
+
     public function checkValid() {
         $curl = curl_init();
 
