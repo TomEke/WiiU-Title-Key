@@ -124,3 +124,31 @@ Route::post('/', function(Illuminate\Http\Request $request) {
     return "failure";
 
 });
+
+
+Route::get('/rss', function() {
+    $feed = App::make("feed");
+
+    $feed->setCache(60);
+
+    if (!$feed->isCached()) {
+        $titles = \App\Title::orderBy('created_at', 'desc')->take(40)->get();
+
+        $feed->title = 'Wii U Title Keys';
+        $feed->description = 'Newest Keys';
+        $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
+        $feed->pubdate = $titles[0]->created_at;
+        $feed->lang = 'en';
+        $feed->setShortening(true); // true or false
+        $feed->setTextLimit(100); // maximum length of description text
+
+        foreach ($titles as $title) {
+            $name = $title->name;
+            if ($name == null) {
+                $name = $title->titleID;
+            }
+            $feed->add($name, null, URL::to("/#" . $title->titleID), $title->created_at, $title->titleID, $title->titleKey);
+        }
+    }
+    return $feed->render('rss');
+});

@@ -20,6 +20,8 @@ For developers, JSON waypoints
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss"/>
+
     <style>
         .monospace-text {
             font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -29,7 +31,19 @@ For developers, JSON waypoints
 <body>
 
 <div class="container-fluid">
-    <h1>Wii U Title Key Database <span class="pull-right"><a class="btn btn-lg btn-primary" href="https://github.com/TomEke/WiiU-Title-Key/">Github</a></span></h1>
+    <h1>Wii U Title Key Database
+
+        <small>
+            <a href="/rss" class="btn btn-primary">
+                <span class="glyphicon glyphicon-tree-conifer"></span>
+                RSS Feed
+            </a>
+        </small>
+
+        <span class="pull-right">
+            <a class="btn btn-lg btn-primary" href="https://github.com/TomEke/WiiU-Title-Key/">Github</a>
+        </span>
+    </h1>
 
     <div class="col-sm-10">
         <div class="panel panel-primary">
