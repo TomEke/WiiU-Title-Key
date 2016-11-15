@@ -87,7 +87,7 @@ Route::post('/uploadticket', function(Illuminate\Http\Request $request) {
 Route::get("/ticket/{id}.tik", function($id) {
    $title = \App\Title::find($id);
     if ($title != null && $title->ticket != false) {
-        return Response::make( Storage::get("tickets/" . $title->titleID . ".tik"))->header("Content-Disposition", "Attachment; filename=title.tik");
+        return Response::make( Storage::get("tickets/" . $title->titleID . ".tik"))->header("Content-Disposition", "Attachment; filename=title.tik")->header("Content-Type", "application/octet-stream");
     }
 });
 
