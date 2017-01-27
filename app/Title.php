@@ -121,7 +121,7 @@ class Title extends Model
         $publisher = trim(mb_convert_encoding(substr($test, 464+512, 256), 'UTF-8', 'UTF-16BE'));   //TODO
         $regionCode = unpack('N', substr($test, 48, 4))[1];
 
-        if ($regionCode == 2147483647) {
+        if ($regionCode == 4294967295) {
             $region = "ALL";
         } else {
             for ($i = 0; $i < 8; $i++) {
