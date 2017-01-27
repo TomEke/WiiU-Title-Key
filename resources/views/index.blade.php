@@ -45,7 +45,7 @@ For developers, JSON waypoints
         </span>
     </h1>
 
-    <div class="col-sm-10">
+    <div class="col-sm-8">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Add a title key
@@ -88,6 +88,27 @@ For developers, JSON waypoints
             <div class="panel-body">
 
                 <form id="keyForm" enctype="multipart/form-data" method="post" action="/uploadticket">
+                    <input type="file" name="file" required="required">
+                    <button type="submit" class="btn btn-default">Upload</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-2">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Upload keys.txt
+            </div>
+
+            <div class="panel-body">
+
+                <form id="keyForm" enctype="multipart/form-data" method="post" action="/uploadkeystxt">
                     <input type="file" name="file" required="required">
                     <button type="submit" class="btn btn-default">Upload</button>
                 </form>

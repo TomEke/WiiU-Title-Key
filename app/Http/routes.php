@@ -84,6 +84,53 @@ Route::post('/uploadticket', function(Illuminate\Http\Request $request) {
     }
 });
 
+Route::post('/uploadkeystxt', function(Illuminate\Http\Request $request) {
+    //Make sure the filesize isn't too big
+    //100000 bytes is about 100 kilobytes, the biggest ticket is about 2kb
+    if (filesize($request->file('file')->getRealPath()) > 100000) {
+        return "File too big";
+    }
+
+    //Save the file
+    $name = uniqid() . $request->file('file')->getClientOriginalName();
+    $file = file_get_contents($request->file('file')->getRealPath());
+    Storage::put($name, $file);
+
+
+    $lines = explode("\n", $file);
+    foreach ($lines as $line) {
+        $line_split = explode(" ", $line);
+        if (count($line_split) > 1) {
+            $titleID = strtolower($line_split[0]);
+            $titleKey = strtolower($line_split[1]);
+
+            if (strlen($titleID) != 16 && strlen($titleKey != 32)) {
+                continue;
+            }
+
+            $test = \App\Title::find($titleID);
+            if ($test && $test->titleKey != null) {
+                continue;
+            }
+
+            if ($test != null) {
+                $title = $test;
+            } else {
+                $title = new \App\Title;
+                $title->titleID = $titleID;
+            }
+            $title->titleKey = $titleKey;
+
+            if ($title->checkValid()) {
+                $title->save();
+                continue;
+            }
+        }
+    }
+
+    return "Thanks";
+});
+
 Route::get("/ticket/{id}.tik", function($id) {
    $title = \App\Title::find($id);
     if ($title != null && $title->ticket != false) {
